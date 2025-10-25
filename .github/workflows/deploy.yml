@@ -2,24 +2,29 @@
 name: Deploy to Kubernetes (Dev)
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:   # запуск вручную
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: self-hosted  # наш локальный runner
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: DIAG — покажи где мы вообще находимся
+      - name: CD into real repo folder
         run: |
-          echo ">>> PWD:"
+          echo "=== CURRENT LOCATION ==="
           pwd
-          echo ">>> LS:"
+          echo "=== AVAILABLE FOLDERS ==="
           ls -la
-          echo ">>> ИЩУ overlays:"
-          find . -maxdepth 4 -type d -name overlays || true
 
-      - name: Apply Kustomize dev
-        run: kubectl apply -k ./k8s/overlays/dev
+          echo ">>> MOVING INTO k8s-demo/"
+          cd k8s-demo
+
+          echo "=== NOW HERE ==="
+          pwd
+          ls -la
+
+          echo ">>> APPLYING KUSTOMIZE"
+          kubectl apply -k k8s/overlays/dev

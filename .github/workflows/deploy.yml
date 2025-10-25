@@ -1,0 +1,19 @@
+name: Deploy to Kubernetes (Dev)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Apply Kustomize
+        working-directory: ./k8s-demo
+        run: |
+          echo "PWD: $(pwd)"
+          ls -la
+          kubectl apply -k k8s/overlays/dev

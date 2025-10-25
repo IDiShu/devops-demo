@@ -12,14 +12,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Show workspace path
+      - name: Debug — show current workspace
         run: |
-          echo "Current path: $(pwd)"
-          echo "Listing files:"
-          ls -la
+          echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
+          echo "Files in workspace:"
+          ls -la "$GITHUB_WORKSPACE"
 
       - name: Apply Kustomize dev
-        working-directory: k8s-demo
         run: |
-          echo "Switched into: $(pwd)"
-          kubectl apply -k ./k8s/overlays/dev
+          echo "Applying from: $GITHUB_WORKSPACE/k8s/overlays/dev"
+          kubectl apply -k "$GITHUB_WORKSPACE/k8s/overlays/dev"

@@ -1,3 +1,4 @@
+# AUTO-DEPLOY updated path
 name: Deploy to Kubernetes (Dev)
 
 on:

@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+nameSuffix: "-prod"   # ← ЭТА СТРОКА ОБЯЗАТЕЛЬНА!
+
+patches:
+  - path: replicas-patch.yaml
+    target:
+      kind: StatefulSet
+      name: postgres    # ← теперь правильно, т.к. БАЗОВОЕ имя postgres
+  - path: postgres-storage-patch.yaml
+    target:
+      kind: StatefulSet
+      name: postgres    # ← тоже postgres, Kustomize сам потом добавит -prod

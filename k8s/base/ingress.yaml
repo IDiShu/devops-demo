@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - hello-dev.local
+      secretName: dev-tls-secret   # создадим далее
+  rules:
+    - host: hello-dev.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-svc
+                port:
+                  number: 80
+

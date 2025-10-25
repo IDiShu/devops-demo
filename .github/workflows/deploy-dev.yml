@@ -1,0 +1,26 @@
+name: Deploy to Kubernetes (Dev)
+
+on:
+  workflow_dispatch:   # запуск вручную
+  push:
+    branches: ["master"]   # автоматически при пуше в master
+
+jobs:
+  deploy:
+    runs-on: self-hosted   # будет выполняться на твоей Ubuntu (runner)
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set image tag (latest always)
+        run: |
+          sed -i 's|image: .*$|image: idishui/devops-demo:latest|g' ./k8s-demo/k8s/overlays/dev/kustomization.yaml || true
+
+      - name: Apply Kustomize dev
+        run: |
+          kubectl apply -k ./k8s-demo/k8s/overlays/dev
+
+      - name: Wait for rollout
+        run: |
+          kubectl rollout status deploy/hello-deployment --timeout=120s

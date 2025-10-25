@@ -7,6 +7,7 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+
     defaults:
       run:
         working-directory: k8s-demo

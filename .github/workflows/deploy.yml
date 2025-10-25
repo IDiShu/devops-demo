@@ -12,13 +12,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Debug — show current workspace
-        run: |
-          echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
-          echo "Files in workspace:"
-          ls -la "$GITHUB_WORKSPACE"
-
-      - name: Apply Kustomize dev
-        run: |
-          echo "Applying from: $GITHUB_WORKSPACE/k8s/overlays/dev"
-          kubectl apply -k "$GITHUB_WORKSPACE/k8s/overlays/dev"
+      - name: Apply Kustomize dev  # ЭТО ТОЧНО ТВОЙ ВАРИАНТ
+        run: kubectl apply -k k8s-demo/k8s/overlays/dev

@@ -12,20 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Apply Kustomize dev (force correct directory)
+      - name: Show context
         run: |
-          echo "=== CURRENT PATH ==="
           pwd
-          echo "=== FILES HERE ==="
           ls -la
 
-          echo ">>> ENTERING k8s-demo/"
-          cd k8s-demo
-
-          echo "=== NOW IN ==="
-          pwd
-          echo "=== FILES HERE ==="
-          ls -la
-
-          echo ">>> RUNNING: kubectl apply -k k8s/overlays/dev"
-          kubectl apply -k k8s/overlays/dev
+      - name: Apply Kustomize dev
+        run: |
+          echo ">>> Deploying from $(pwd)"
+          kubectl apply -k ./k8s/overlays/dev

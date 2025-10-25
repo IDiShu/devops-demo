@@ -14,18 +14,18 @@ jobs:
 
       - name: Apply Kustomize dev (force correct directory)
         run: |
-          echo "Current path:"
+          echo "=== CURRENT PATH ==="
           pwd
-          echo "Listing files:"
+          echo "=== FILES HERE ==="
           ls -la
 
           echo ">>> ENTERING k8s-demo/"
           cd k8s-demo
 
-          echo "Now in:"
+          echo "=== NOW IN ==="
           pwd
-          echo "Listing:"
+          echo "=== FILES HERE ==="
           ls -la
 
-          echo ">>> Running kubectl apply..."
+          echo ">>> RUNNING: kubectl apply -k k8s/overlays/dev"
           kubectl apply -k k8s/overlays/dev

@@ -1,0 +1,25 @@
+name: Deploy to Kubernetes (Dev) v2
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: CD & Deploy
+        run: |
+          echo ">>> PWD:"
+          pwd
+          echo ">>> LS:"
+          ls -la
+
+          echo ">>> CD into k8s-demo/"
+          cd k8s-demo
+
+          echo ">>> APPLYING:"
+          kubectl apply -k k8s/overlays/dev

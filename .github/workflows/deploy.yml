@@ -1,2 +1,14 @@
-- name: Apply Kustomize dev
-run: kubectl --kubeconfig=/home/user/.kube/config apply -k ./k8s-demo/k8s/overlays/dev
+name: Deploy to Kubernetes (Dev)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Apply Kustomize dev
+        run: kubectl --kubeconfig=/home/user/.kube/config apply -k ./k8s-demo/k8s/overlays/dev

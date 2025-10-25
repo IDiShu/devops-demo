@@ -12,5 +12,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Apply Kustomize dev  # ЭТО ТОЧНО ТВОЙ ВАРИАНТ
-        run: kubectl apply -k k8s-demo/k8s/overlays/dev
+      - name: Apply Kustomize dev (force correct directory)
+        run: |
+          echo "Current path:"
+          pwd
+          echo "Listing files:"
+          ls -la
+
+          echo ">>> ENTERING k8s-demo/"
+          cd k8s-demo
+
+          echo "Now in:"
+          pwd
+          echo "Listing:"
+          ls -la
+
+          echo ">>> Running kubectl apply..."
+          kubectl apply -k k8s/overlays/dev

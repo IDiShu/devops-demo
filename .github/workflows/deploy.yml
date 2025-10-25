@@ -12,5 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Echo workspace path
+        run: |
+          echo "Workspace is $GITHUB_WORKSPACE"
+
       - name: Apply Kustomize dev
-        run: kubectl apply -k ./k8s-demo/k8s/overlays/dev
+        run: |
+          kubectl apply -k "$GITHUB_WORKSPACE/devops-demo/k8s-demo/k8s/overlays/dev"

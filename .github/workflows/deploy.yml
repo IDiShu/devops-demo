@@ -6,9 +6,16 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Verify kubectl access
+        run: kubectl get nodes
+
       - name: Apply Kustomize dev
-        run: kubectl --kubeconfig=/home/user/.kube/config apply -k ./k8s/overlays/dev
+        run: kubectl apply -k ./k8s-demo/k8s/overlays/dev
+
+      - name: Wait for rollout
+        run: kubectl rollout status deployment/hello-deployment-dev

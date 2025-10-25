@@ -8,13 +8,18 @@ jobs:
   deploy:
     runs-on: self-hosted
 
-    defaults:
-      run:
-        working-directory: k8s-demo
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Show workspace path
+        run: |
+          echo "Current path: $(pwd)"
+          echo "Listing files:"
+          ls -la
+
       - name: Apply Kustomize dev
-        run: kubectl apply -k ./k8s/overlays/dev
+        working-directory: k8s-demo
+        run: |
+          echo "Switched into: $(pwd)"
+          kubectl apply -k ./k8s/overlays/dev

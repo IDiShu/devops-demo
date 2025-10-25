@@ -12,12 +12,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Show context
+      - name: DIAG — покажи где мы вообще находимся
         run: |
+          echo ">>> PWD:"
           pwd
+          echo ">>> LS:"
           ls -la
+          echo ">>> ИЩУ overlays:"
+          find . -maxdepth 4 -type d -name overlays || true
 
       - name: Apply Kustomize dev
-        run: |
-          echo ">>> Deploying from $(pwd)"
-          kubectl apply -k ./k8s/overlays/dev
+        run: kubectl apply -k ./k8s/overlays/dev

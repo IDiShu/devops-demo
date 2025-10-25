@@ -7,13 +7,13 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: k8s-demo
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Echo workspace
-        run: echo "Workspace is $GITHUB_WORKSPACE"
-
       - name: Apply Kustomize dev
-        run: kubectl apply -k "./k8s-demo/k8s/overlays/dev"
+        run: kubectl apply -k ./k8s/overlays/dev

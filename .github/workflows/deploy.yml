@@ -11,4 +11,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Apply Kustomize dev
-        run: kubectl --kubeconfig=/home/user/.kube/config apply -k ./k8s-demo/k8s/overlays/dev
+        run: kubectl --kubeconfig=/home/user/.kube/config apply -k ./k8s/overlays/dev

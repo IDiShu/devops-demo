@@ -19,7 +19,7 @@ jobs:
 
       - name: Apply Kustomize dev
         run: |
-          kubectl apply -k ./k8s-demo/k8s/overlays/dev
+          kubectl apply -k k8s-demo/k8s/overlays/dev
 
       - name: Wait for rollout
         run: |

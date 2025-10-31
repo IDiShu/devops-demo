@@ -384,7 +384,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Set image tag (latest always)
         run: |
-          sed -i 's|image: .*$|image: idishui/devops-demo:latest|g' ./k8s/overlays/dev/kustomization.yaml || true
+          sed -i 's|image: .*$|image: yourname/devops-demo:latest|g' ./k8s/overlays/dev/kustomization.yaml || true
       - name: Apply Kustomize dev
         run: |
           kubectl apply -k ./k8s/overlays/dev
@@ -480,7 +480,7 @@ jobs:
 
       - name: Set image tag (latest always)
         run: |
-          sed -i 's|image: .*$|image: idishui/devops-demo:latest|g' ./k8s/overlays/dev/kustomization.yaml || true
+          sed -i 's|image: .*$|image: yourname/devops-demo:latest|g' ./k8s/overlays/dev/kustomization.yaml || true
 
       - name: Apply Kustomize dev
         run: |
@@ -510,5 +510,3 @@ git push
 * Всё автоматизировано
 
 ---
-
-Документ завершён. Готов принять правки ✅
